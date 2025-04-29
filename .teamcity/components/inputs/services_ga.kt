@@ -406,11 +406,6 @@ var ServicesListGa = mapOf(
         "displayName" to "Firebasedatabase",
         "path" to "./google/services/firebasedatabase"
     ),
-    "firebasedataconnect" to mapOf(
-        "name" to "firebasedataconnect",
-        "displayName" to "Firebasedataconnect",
-        "path" to "./google/services/firebasedataconnect"
-    ),
     "firebaseextensions" to mapOf(
         "name" to "firebaseextensions",
         "displayName" to "Firebaseextensions",

@@ -134,8 +134,7 @@ func DataSourceArtifactRegistryDockerImageRead(d *schema.ResourceData, meta inte
 			return fmt.Errorf("Error setting api endpoint")
 		}
 
-		// to reduce the number of pages we need to fetch, we set the pageSize to 1000(max)
-		urlRequest, err = transport_tpg.AddQueryParams(urlRequest, map[string]string{"orderBy": "update_time desc", "pageSize": "1000"})
+		urlRequest, err = transport_tpg.AddQueryParams(urlRequest, map[string]string{"orderBy": "update_time desc"})
 		if err != nil {
 			return err
 		}

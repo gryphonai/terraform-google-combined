@@ -1,5 +1,5 @@
 ---
-subcategory: "Certificate Manager"
+subcategory: "Certificate manager"
 description: |-
   Contains the data that describes a Certificate Map
 ---

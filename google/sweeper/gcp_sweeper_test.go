@@ -67,10 +67,8 @@ import (
 	_ "github.com/hashicorp/terraform-provider-google/google/services/edgecontainer"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/edgenetwork"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/essentialcontacts"
-	_ "github.com/hashicorp/terraform-provider-google/google/services/eventarc"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/filestore"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/firebaseappcheck"
-	_ "github.com/hashicorp/terraform-provider-google/google/services/firebasedataconnect"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/firestore"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/gemini"
 	_ "github.com/hashicorp/terraform-provider-google/google/services/gkebackup"
@@ -161,6 +159,6 @@ import (
 	"github.com/hashicorp/terraform-provider-google/google/sweeper"
 )
 
-func TestAccExecuteSweepers(t *testing.T) {
+func TestSweepers(t *testing.T) {
 	sweeper.ExecuteSweepers(t)
 }

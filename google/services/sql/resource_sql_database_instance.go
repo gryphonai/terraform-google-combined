@@ -1633,7 +1633,7 @@ func expandSqlServerAdvancedMachineFeatures(configured interface{}) *sqladmin.Ad
 
 func expandSqlServerAuditConfig(configured interface{}) *sqladmin.SqlServerAuditConfig {
 	l := configured.([]interface{})
-	if len(l) == 0 || l[0] == nil {
+	if len(l) == 0 {
 		return nil
 	}
 

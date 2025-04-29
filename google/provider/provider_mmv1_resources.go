@@ -68,10 +68,8 @@ import (
 	"github.com/hashicorp/terraform-provider-google/google/services/edgecontainer"
 	"github.com/hashicorp/terraform-provider-google/google/services/edgenetwork"
 	"github.com/hashicorp/terraform-provider-google/google/services/essentialcontacts"
-	"github.com/hashicorp/terraform-provider-google/google/services/eventarc"
 	"github.com/hashicorp/terraform-provider-google/google/services/filestore"
 	"github.com/hashicorp/terraform-provider-google/google/services/firebaseappcheck"
-	"github.com/hashicorp/terraform-provider-google/google/services/firebasedataconnect"
 	"github.com/hashicorp/terraform-provider-google/google/services/firestore"
 	"github.com/hashicorp/terraform-provider-google/google/services/gemini"
 	"github.com/hashicorp/terraform-provider-google/google/services/gkebackup"
@@ -154,10 +152,8 @@ var handwrittenDatasources = map[string]*schema.Resource{
 	"google_access_approval_project_service_account":       accessapproval.DataSourceAccessApprovalProjectServiceAccount(),
 	"google_access_context_manager_access_policy":          accesscontextmanager.DataSourceAccessContextManagerAccessPolicy(),
 	"google_active_folder":                                 resourcemanager.DataSourceGoogleActiveFolder(),
-	"google_alloydb_cluster":                               alloydb.DataSourceAlloydbDatabaseCluster(),
 	"google_alloydb_locations":                             alloydb.DataSourceAlloydbLocations(),
 	"google_alloydb_supported_database_flags":              alloydb.DataSourceAlloydbSupportedDatabaseFlags(),
-	"google_alloydb_instance":                              alloydb.DataSourceAlloydbDatabaseInstance(),
 	"google_artifact_registry_docker_image":                artifactregistry.DataSourceArtifactRegistryDockerImage(),
 	"google_artifact_registry_locations":                   artifactregistry.DataSourceGoogleArtifactRegistryLocations(),
 	"google_artifact_registry_repository":                  artifactregistry.DataSourceArtifactRegistryRepository(),
@@ -165,9 +161,6 @@ var handwrittenDatasources = map[string]*schema.Resource{
 	"google_app_engine_default_service_account":            appengine.DataSourceGoogleAppEngineDefaultServiceAccount(),
 	"google_apphub_application":                            apphub.DataSourceGoogleApphubApplication(),
 	"google_apphub_discovered_service":                     apphub.DataSourceApphubDiscoveredService(),
-	"google_backup_dr_management_server":                   backupdr.DataSourceGoogleCloudBackupDRService(),
-	"google_backup_dr_backup_plan_association":             backupdr.DataSourceGoogleCloudBackupDRBackupPlanAssociation(),
-	"google_backup_dr_backup_plan":                         backupdr.DataSourceGoogleCloudBackupDRBackupPlan(),
 	"google_backup_dr_backup":                              backupdr.DataSourceGoogleCloudBackupDRBackup(),
 	"google_backup_dr_data_source":                         backupdr.DataSourceGoogleCloudBackupDRDataSource(),
 	"google_backup_dr_backup_vault":                        backupdr.DataSourceGoogleCloudBackupDRBackupVault(),
@@ -264,8 +257,6 @@ var handwrittenDatasources = map[string]*schema.Resource{
 	"google_iam_policy":                                    resourcemanager.DataSourceGoogleIamPolicy(),
 	"google_iam_role":                                      resourcemanager.DataSourceGoogleIamRole(),
 	"google_iam_testable_permissions":                      resourcemanager.DataSourceGoogleIamTestablePermissions(),
-	"google_iam_workload_identity_pool":                    iambeta.DataSourceIAMBetaWorkloadIdentityPool(),
-	"google_iam_workload_identity_pool_provider":           iambeta.DataSourceIAMBetaWorkloadIdentityPoolProvider(),
 	"google_iap_client":                                    iap.DataSourceGoogleIapClient(),
 	"google_kms_crypto_key":                                kms.DataSourceGoogleKmsCryptoKey(),
 	"google_kms_crypto_keys":                               kms.DataSourceGoogleKmsCryptoKeys(),
@@ -305,7 +296,6 @@ var handwrittenDatasources = map[string]*schema.Resource{
 	"google_privileged_access_manager_entitlement":         privilegedaccessmanager.DataSourceGooglePrivilegedAccessManagerEntitlement(),
 	"google_project":                                       resourcemanager.DataSourceGoogleProject(),
 	"google_projects":                                      resourcemanager.DataSourceGoogleProjects(),
-	"google_project_ancestry":                              resourcemanager.DataSourceGoogleProjectAncestry(),
 	"google_project_organization_policy":                   resourcemanager.DataSourceGoogleProjectOrganizationPolicy(),
 	"google_project_service":                               resourcemanager.DataSourceGoogleProjectService(),
 	"google_pubsub_subscription":                           pubsub.DataSourceGooglePubsubSubscription(),
@@ -371,8 +361,6 @@ var generatedIAMDatasources = map[string]*schema.Resource{
 	"google_access_context_manager_access_policy_iam_policy": tpgiamresource.DataSourceIamPolicy(accesscontextmanager.AccessContextManagerAccessPolicyIamSchema, accesscontextmanager.AccessContextManagerAccessPolicyIamUpdaterProducer),
 	"google_apigee_environment_iam_policy":                   tpgiamresource.DataSourceIamPolicy(apigee.ApigeeEnvironmentIamSchema, apigee.ApigeeEnvironmentIamUpdaterProducer),
 	"google_artifact_registry_repository_iam_policy":         tpgiamresource.DataSourceIamPolicy(artifactregistry.ArtifactRegistryRepositoryIamSchema, artifactregistry.ArtifactRegistryRepositoryIamUpdaterProducer),
-	"google_beyondcorp_application_iam_policy":               tpgiamresource.DataSourceIamPolicy(beyondcorp.BeyondcorpApplicationIamSchema, beyondcorp.BeyondcorpApplicationIamUpdaterProducer),
-	"google_beyondcorp_security_gateway_iam_policy":          tpgiamresource.DataSourceIamPolicy(beyondcorp.BeyondcorpSecurityGatewayIamSchema, beyondcorp.BeyondcorpSecurityGatewayIamUpdaterProducer),
 	"google_bigquery_table_iam_policy":                       tpgiamresource.DataSourceIamPolicy(bigquery.BigQueryTableIamSchema, bigquery.BigQueryTableIamUpdaterProducer),
 	"google_bigquery_analytics_hub_data_exchange_iam_policy": tpgiamresource.DataSourceIamPolicy(bigqueryanalyticshub.BigqueryAnalyticsHubDataExchangeIamSchema, bigqueryanalyticshub.BigqueryAnalyticsHubDataExchangeIamUpdaterProducer),
 	"google_bigquery_analytics_hub_listing_iam_policy":       tpgiamresource.DataSourceIamPolicy(bigqueryanalyticshub.BigqueryAnalyticsHubListingIamSchema, bigqueryanalyticshub.BigqueryAnalyticsHubListingIamUpdaterProducer),
@@ -483,9 +471,9 @@ var handwrittenIAMDatasources = map[string]*schema.Resource{
 }
 
 // Resources
-// Generated resources: 530
-// Generated IAM resources: 276
-// Total generated resources: 806
+// Generated resources: 515
+// Generated IAM resources: 270
+// Total generated resources: 785
 var generatedResources = map[string]*schema.Resource{
 	"google_folder_access_approval_settings":                                     accessapproval.ResourceAccessApprovalFolderSettings(),
 	"google_organization_access_approval_settings":                               accessapproval.ResourceAccessApprovalOrganizationSettings(),
@@ -553,21 +541,11 @@ var generatedResources = map[string]*schema.Resource{
 	"google_artifact_registry_repository_iam_binding":                            tpgiamresource.ResourceIamBinding(artifactregistry.ArtifactRegistryRepositoryIamSchema, artifactregistry.ArtifactRegistryRepositoryIamUpdaterProducer, artifactregistry.ArtifactRegistryRepositoryIdParseFunc),
 	"google_artifact_registry_repository_iam_member":                             tpgiamresource.ResourceIamMember(artifactregistry.ArtifactRegistryRepositoryIamSchema, artifactregistry.ArtifactRegistryRepositoryIamUpdaterProducer, artifactregistry.ArtifactRegistryRepositoryIdParseFunc),
 	"google_artifact_registry_repository_iam_policy":                             tpgiamresource.ResourceIamPolicy(artifactregistry.ArtifactRegistryRepositoryIamSchema, artifactregistry.ArtifactRegistryRepositoryIamUpdaterProducer, artifactregistry.ArtifactRegistryRepositoryIdParseFunc),
-	"google_backup_dr_backup_plan":                                               backupdr.ResourceBackupDRBackupPlan(),
-	"google_backup_dr_backup_plan_association":                                   backupdr.ResourceBackupDRBackupPlanAssociation(),
 	"google_backup_dr_backup_vault":                                              backupdr.ResourceBackupDRBackupVault(),
-	"google_backup_dr_management_server":                                         backupdr.ResourceBackupDRManagementServer(),
 	"google_beyondcorp_app_connection":                                           beyondcorp.ResourceBeyondcorpAppConnection(),
 	"google_beyondcorp_app_connector":                                            beyondcorp.ResourceBeyondcorpAppConnector(),
 	"google_beyondcorp_app_gateway":                                              beyondcorp.ResourceBeyondcorpAppGateway(),
-	"google_beyondcorp_application":                                              beyondcorp.ResourceBeyondcorpApplication(),
-	"google_beyondcorp_application_iam_binding":                                  tpgiamresource.ResourceIamBinding(beyondcorp.BeyondcorpApplicationIamSchema, beyondcorp.BeyondcorpApplicationIamUpdaterProducer, beyondcorp.BeyondcorpApplicationIdParseFunc),
-	"google_beyondcorp_application_iam_member":                                   tpgiamresource.ResourceIamMember(beyondcorp.BeyondcorpApplicationIamSchema, beyondcorp.BeyondcorpApplicationIamUpdaterProducer, beyondcorp.BeyondcorpApplicationIdParseFunc),
-	"google_beyondcorp_application_iam_policy":                                   tpgiamresource.ResourceIamPolicy(beyondcorp.BeyondcorpApplicationIamSchema, beyondcorp.BeyondcorpApplicationIamUpdaterProducer, beyondcorp.BeyondcorpApplicationIdParseFunc),
 	"google_beyondcorp_security_gateway":                                         beyondcorp.ResourceBeyondcorpSecurityGateway(),
-	"google_beyondcorp_security_gateway_iam_binding":                             tpgiamresource.ResourceIamBinding(beyondcorp.BeyondcorpSecurityGatewayIamSchema, beyondcorp.BeyondcorpSecurityGatewayIamUpdaterProducer, beyondcorp.BeyondcorpSecurityGatewayIdParseFunc),
-	"google_beyondcorp_security_gateway_iam_member":                              tpgiamresource.ResourceIamMember(beyondcorp.BeyondcorpSecurityGatewayIamSchema, beyondcorp.BeyondcorpSecurityGatewayIamUpdaterProducer, beyondcorp.BeyondcorpSecurityGatewayIdParseFunc),
-	"google_beyondcorp_security_gateway_iam_policy":                              tpgiamresource.ResourceIamPolicy(beyondcorp.BeyondcorpSecurityGatewayIamSchema, beyondcorp.BeyondcorpSecurityGatewayIamUpdaterProducer, beyondcorp.BeyondcorpSecurityGatewayIdParseFunc),
 	"google_biglake_catalog":                                                     biglake.ResourceBiglakeCatalog(),
 	"google_biglake_database":                                                    biglake.ResourceBiglakeDatabase(),
 	"google_biglake_table":                                                       biglake.ResourceBiglakeTable(),
@@ -586,7 +564,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_bigquery_analytics_hub_listing_iam_binding":                          tpgiamresource.ResourceIamBinding(bigqueryanalyticshub.BigqueryAnalyticsHubListingIamSchema, bigqueryanalyticshub.BigqueryAnalyticsHubListingIamUpdaterProducer, bigqueryanalyticshub.BigqueryAnalyticsHubListingIdParseFunc),
 	"google_bigquery_analytics_hub_listing_iam_member":                           tpgiamresource.ResourceIamMember(bigqueryanalyticshub.BigqueryAnalyticsHubListingIamSchema, bigqueryanalyticshub.BigqueryAnalyticsHubListingIamUpdaterProducer, bigqueryanalyticshub.BigqueryAnalyticsHubListingIdParseFunc),
 	"google_bigquery_analytics_hub_listing_iam_policy":                           tpgiamresource.ResourceIamPolicy(bigqueryanalyticshub.BigqueryAnalyticsHubListingIamSchema, bigqueryanalyticshub.BigqueryAnalyticsHubListingIamUpdaterProducer, bigqueryanalyticshub.BigqueryAnalyticsHubListingIdParseFunc),
-	"google_bigquery_analytics_hub_listing_subscription":                         bigqueryanalyticshub.ResourceBigqueryAnalyticsHubListingSubscription(),
 	"google_bigquery_connection":                                                 bigqueryconnection.ResourceBigqueryConnectionConnection(),
 	"google_bigquery_connection_iam_binding":                                     tpgiamresource.ResourceIamBinding(bigqueryconnection.BigqueryConnectionConnectionIamSchema, bigqueryconnection.BigqueryConnectionConnectionIamUpdaterProducer, bigqueryconnection.BigqueryConnectionConnectionIdParseFunc),
 	"google_bigquery_connection_iam_member":                                      tpgiamresource.ResourceIamMember(bigqueryconnection.BigqueryConnectionConnectionIamSchema, bigqueryconnection.BigqueryConnectionConnectionIamUpdaterProducer, bigqueryconnection.BigqueryConnectionConnectionIdParseFunc),
@@ -665,13 +642,11 @@ var generatedResources = map[string]*schema.Resource{
 	"google_cloud_tasks_queue_iam_binding":                                       tpgiamresource.ResourceIamBinding(cloudtasks.CloudTasksQueueIamSchema, cloudtasks.CloudTasksQueueIamUpdaterProducer, cloudtasks.CloudTasksQueueIdParseFunc),
 	"google_cloud_tasks_queue_iam_member":                                        tpgiamresource.ResourceIamMember(cloudtasks.CloudTasksQueueIamSchema, cloudtasks.CloudTasksQueueIamUpdaterProducer, cloudtasks.CloudTasksQueueIdParseFunc),
 	"google_cloud_tasks_queue_iam_policy":                                        tpgiamresource.ResourceIamPolicy(cloudtasks.CloudTasksQueueIamSchema, cloudtasks.CloudTasksQueueIamUpdaterProducer, cloudtasks.CloudTasksQueueIdParseFunc),
-	"google_colab_notebook_execution":                                            colab.ResourceColabNotebookExecution(),
 	"google_colab_runtime":                                                       colab.ResourceColabRuntime(),
 	"google_colab_runtime_template":                                              colab.ResourceColabRuntimeTemplate(),
 	"google_colab_runtime_template_iam_binding":                                  tpgiamresource.ResourceIamBinding(colab.ColabRuntimeTemplateIamSchema, colab.ColabRuntimeTemplateIamUpdaterProducer, colab.ColabRuntimeTemplateIdParseFunc),
 	"google_colab_runtime_template_iam_member":                                   tpgiamresource.ResourceIamMember(colab.ColabRuntimeTemplateIamSchema, colab.ColabRuntimeTemplateIamUpdaterProducer, colab.ColabRuntimeTemplateIdParseFunc),
 	"google_colab_runtime_template_iam_policy":                                   tpgiamresource.ResourceIamPolicy(colab.ColabRuntimeTemplateIamSchema, colab.ColabRuntimeTemplateIamUpdaterProducer, colab.ColabRuntimeTemplateIdParseFunc),
-	"google_colab_schedule":                                                      colab.ResourceColabSchedule(),
 	"google_composer_user_workloads_config_map":                                  composer.ResourceComposerUserWorkloadsConfigMap(),
 	"google_compute_address":                                                     compute.ResourceComputeAddress(),
 	"google_compute_autoscaler":                                                  compute.ResourceComputeAutoscaler(),
@@ -868,9 +843,12 @@ var generatedResources = map[string]*schema.Resource{
 	"google_developer_connect_connection":                                        developerconnect.ResourceDeveloperConnectConnection(),
 	"google_developer_connect_git_repository_link":                               developerconnect.ResourceDeveloperConnectGitRepositoryLink(),
 	"google_dialogflow_agent":                                                    dialogflow.ResourceDialogflowAgent(),
+	"google_dialogflow_conversation_profile":                                     dialogflow.ResourceDialogflowConversationProfile(),
 	"google_dialogflow_entity_type":                                              dialogflow.ResourceDialogflowEntityType(),
+	"google_dialogflow_environment":                                              dialogflow.ResourceDialogflowEnvironment(),
 	"google_dialogflow_fulfillment":                                              dialogflow.ResourceDialogflowFulfillment(),
 	"google_dialogflow_intent":                                                   dialogflow.ResourceDialogflowIntent(),
+	"google_dialogflow_versions":                                                 dialogflow.ResourceDialogflowVersions(),
 	"google_dialogflow_cx_agent":                                                 dialogflowcx.ResourceDialogflowCXAgent(),
 	"google_dialogflow_cx_entity_type":                                           dialogflowcx.ResourceDialogflowCXEntityType(),
 	"google_dialogflow_cx_environment":                                           dialogflowcx.ResourceDialogflowCXEnvironment(),
@@ -904,8 +882,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_edgenetwork_network":                                                 edgenetwork.ResourceEdgenetworkNetwork(),
 	"google_edgenetwork_subnet":                                                  edgenetwork.ResourceEdgenetworkSubnet(),
 	"google_essential_contacts_contact":                                          essentialcontacts.ResourceEssentialContactsContact(),
-	"google_eventarc_google_channel_config":                                      eventarc.ResourceEventarcGoogleChannelConfig(),
-	"google_eventarc_trigger":                                                    eventarc.ResourceEventarcTrigger(),
 	"google_filestore_backup":                                                    filestore.ResourceFilestoreBackup(),
 	"google_filestore_instance":                                                  filestore.ResourceFilestoreInstance(),
 	"google_filestore_snapshot":                                                  filestore.ResourceFilestoreSnapshot(),
@@ -916,19 +892,12 @@ var generatedResources = map[string]*schema.Resource{
 	"google_firebase_app_check_recaptcha_enterprise_config":                      firebaseappcheck.ResourceFirebaseAppCheckRecaptchaEnterpriseConfig(),
 	"google_firebase_app_check_recaptcha_v3_config":                              firebaseappcheck.ResourceFirebaseAppCheckRecaptchaV3Config(),
 	"google_firebase_app_check_service_config":                                   firebaseappcheck.ResourceFirebaseAppCheckServiceConfig(),
-	"google_firebase_data_connect_service":                                       firebasedataconnect.ResourceFirebaseDataConnectService(),
 	"google_firestore_backup_schedule":                                           firestore.ResourceFirestoreBackupSchedule(),
 	"google_firestore_database":                                                  firestore.ResourceFirestoreDatabase(),
 	"google_firestore_document":                                                  firestore.ResourceFirestoreDocument(),
 	"google_firestore_field":                                                     firestore.ResourceFirestoreField(),
 	"google_firestore_index":                                                     firestore.ResourceFirestoreIndex(),
 	"google_gemini_code_repository_index":                                        gemini.ResourceGeminiCodeRepositoryIndex(),
-	"google_gemini_data_sharing_with_google_setting":                             gemini.ResourceGeminiDataSharingWithGoogleSetting(),
-	"google_gemini_gemini_gcp_enablement_setting":                                gemini.ResourceGeminiGeminiGcpEnablementSetting(),
-	"google_gemini_logging_setting":                                              gemini.ResourceGeminiLoggingSetting(),
-	"google_gemini_logging_setting_binding":                                      gemini.ResourceGeminiLoggingSettingBinding(),
-	"google_gemini_release_channel_setting":                                      gemini.ResourceGeminiReleaseChannelSetting(),
-	"google_gemini_release_channel_setting_binding":                              gemini.ResourceGeminiReleaseChannelSettingBinding(),
 	"google_gemini_repository_group":                                             gemini.ResourceGeminiRepositoryGroup(),
 	"google_gemini_repository_group_iam_binding":                                 tpgiamresource.ResourceIamBinding(gemini.GeminiRepositoryGroupIamSchema, gemini.GeminiRepositoryGroupIamUpdaterProducer, gemini.GeminiRepositoryGroupIdParseFunc),
 	"google_gemini_repository_group_iam_member":                                  tpgiamresource.ResourceIamMember(gemini.GeminiRepositoryGroupIamSchema, gemini.GeminiRepositoryGroupIamUpdaterProducer, gemini.GeminiRepositoryGroupIdParseFunc),
@@ -1070,7 +1039,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_netapp_backup_vault":                                                 netapp.ResourceNetappBackupVault(),
 	"google_netapp_storage_pool":                                                 netapp.ResourceNetappStoragePool(),
 	"google_netapp_volume":                                                       netapp.ResourceNetappVolume(),
-	"google_netapp_volume_quota_rule":                                            netapp.ResourceNetappVolumeQuotaRule(),
 	"google_netapp_volume_replication":                                           netapp.ResourceNetappVolumeReplication(),
 	"google_netapp_volume_snapshot":                                              netapp.ResourceNetappVolumeSnapshot(),
 	"google_netapp_kmsconfig":                                                    netapp.ResourceNetappkmsconfig(),
@@ -1221,7 +1189,6 @@ var generatedResources = map[string]*schema.Resource{
 	"google_spanner_database":                                                    spanner.ResourceSpannerDatabase(),
 	"google_spanner_instance":                                                    spanner.ResourceSpannerInstance(),
 	"google_spanner_instance_config":                                             spanner.ResourceSpannerInstanceConfig(),
-	"google_spanner_instance_partition":                                          spanner.ResourceSpannerInstancePartition(),
 	"google_sql_database":                                                        sql.ResourceSQLDatabase(),
 	"google_sql_source_representation_instance":                                  sql.ResourceSQLSourceRepresentationInstance(),
 	"google_storage_bucket_iam_binding":                                          tpgiamresource.ResourceIamBinding(storage.StorageBucketIamSchema, storage.StorageBucketIamUpdaterProducer, storage.StorageBucketIdParseFunc),

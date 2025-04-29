@@ -252,10 +252,8 @@ type Config struct {
 	EdgecontainerBasePath            string
 	EdgenetworkBasePath              string
 	EssentialContactsBasePath        string
-	EventarcBasePath                 string
 	FilestoreBasePath                string
 	FirebaseAppCheckBasePath         string
-	FirebaseDataConnectBasePath      string
 	FirestoreBasePath                string
 	GeminiBasePath                   string
 	GKEBackupBasePath                string
@@ -406,10 +404,8 @@ const DocumentAIWarehouseBasePathKey = "DocumentAIWarehouse"
 const EdgecontainerBasePathKey = "Edgecontainer"
 const EdgenetworkBasePathKey = "Edgenetwork"
 const EssentialContactsBasePathKey = "EssentialContacts"
-const EventarcBasePathKey = "Eventarc"
 const FilestoreBasePathKey = "Filestore"
 const FirebaseAppCheckBasePathKey = "FirebaseAppCheck"
-const FirebaseDataConnectBasePathKey = "FirebaseDataConnect"
 const FirestoreBasePathKey = "Firestore"
 const GeminiBasePathKey = "Gemini"
 const GKEBackupBasePathKey = "GKEBackup"
@@ -545,7 +541,7 @@ var DefaultBasePaths = map[string]string{
 	DatastreamBasePathKey:               "https://datastream.googleapis.com/v1/",
 	DeploymentManagerBasePathKey:        "https://www.googleapis.com/deploymentmanager/v2/",
 	DeveloperConnectBasePathKey:         "https://developerconnect.googleapis.com/v1/",
-	DialogflowBasePathKey:               "https://dialogflow.googleapis.com/v2/",
+	DialogflowBasePathKey:               "https://dialogflow.googleapis.com/v2beta1/",
 	DialogflowCXBasePathKey:             "https://{{location}}-dialogflow.googleapis.com/v3/",
 	DiscoveryEngineBasePathKey:          "https://{{location}}-discoveryengine.googleapis.com/v1/",
 	DNSBasePathKey:                      "https://dns.googleapis.com/dns/v1/",
@@ -554,10 +550,8 @@ var DefaultBasePaths = map[string]string{
 	EdgecontainerBasePathKey:            "https://edgecontainer.googleapis.com/v1/",
 	EdgenetworkBasePathKey:              "https://edgenetwork.googleapis.com/v1/",
 	EssentialContactsBasePathKey:        "https://essentialcontacts.googleapis.com/v1/",
-	EventarcBasePathKey:                 "https://eventarc.googleapis.com/v1/",
 	FilestoreBasePathKey:                "https://file.googleapis.com/v1/",
 	FirebaseAppCheckBasePathKey:         "https://firebaseappcheck.googleapis.com/v1/",
-	FirebaseDataConnectBasePathKey:      "https://firebasedataconnect.googleapis.com/v1/",
 	FirestoreBasePathKey:                "https://firestore.googleapis.com/v1/",
 	GeminiBasePathKey:                   "https://cloudaicompanion.googleapis.com/v1/",
 	GKEBackupBasePathKey:                "https://gkebackup.googleapis.com/v1/",
@@ -1029,11 +1023,6 @@ func SetEndpointDefaults(d *schema.ResourceData) error {
 			"GOOGLE_ESSENTIAL_CONTACTS_CUSTOM_ENDPOINT",
 		}, DefaultBasePaths[EssentialContactsBasePathKey]))
 	}
-	if d.Get("eventarc_custom_endpoint") == "" {
-		d.Set("eventarc_custom_endpoint", MultiEnvDefault([]string{
-			"GOOGLE_EVENTARC_CUSTOM_ENDPOINT",
-		}, DefaultBasePaths[EventarcBasePathKey]))
-	}
 	if d.Get("filestore_custom_endpoint") == "" {
 		d.Set("filestore_custom_endpoint", MultiEnvDefault([]string{
 			"GOOGLE_FILESTORE_CUSTOM_ENDPOINT",
@@ -1043,11 +1032,6 @@ func SetEndpointDefaults(d *schema.ResourceData) error {
 		d.Set("firebase_app_check_custom_endpoint", MultiEnvDefault([]string{
 			"GOOGLE_FIREBASE_APP_CHECK_CUSTOM_ENDPOINT",
 		}, DefaultBasePaths[FirebaseAppCheckBasePathKey]))
-	}
-	if d.Get("firebase_data_connect_custom_endpoint") == "" {
-		d.Set("firebase_data_connect_custom_endpoint", MultiEnvDefault([]string{
-			"GOOGLE_FIREBASE_DATA_CONNECT_CUSTOM_ENDPOINT",
-		}, DefaultBasePaths[FirebaseDataConnectBasePathKey]))
 	}
 	if d.Get("firestore_custom_endpoint") == "" {
 		d.Set("firestore_custom_endpoint", MultiEnvDefault([]string{
@@ -2368,10 +2352,8 @@ func ConfigureBasePaths(c *Config) {
 	c.EdgecontainerBasePath = DefaultBasePaths[EdgecontainerBasePathKey]
 	c.EdgenetworkBasePath = DefaultBasePaths[EdgenetworkBasePathKey]
 	c.EssentialContactsBasePath = DefaultBasePaths[EssentialContactsBasePathKey]
-	c.EventarcBasePath = DefaultBasePaths[EventarcBasePathKey]
 	c.FilestoreBasePath = DefaultBasePaths[FilestoreBasePathKey]
 	c.FirebaseAppCheckBasePath = DefaultBasePaths[FirebaseAppCheckBasePathKey]
-	c.FirebaseDataConnectBasePath = DefaultBasePaths[FirebaseDataConnectBasePathKey]
 	c.FirestoreBasePath = DefaultBasePaths[FirestoreBasePathKey]
 	c.GeminiBasePath = DefaultBasePaths[GeminiBasePathKey]
 	c.GKEBackupBasePath = DefaultBasePaths[GKEBackupBasePathKey]

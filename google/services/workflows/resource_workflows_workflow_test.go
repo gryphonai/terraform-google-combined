@@ -15,6 +15,7 @@ import (
 )
 
 func TestAccWorkflowsWorkflow_Update(t *testing.T) {
+	// Custom test written to test diffs
 	t.Parallel()
 
 	workflowName := fmt.Sprintf("tf-test-acc-workflow-%d", acctest.RandInt(t))
@@ -45,9 +46,6 @@ resource "google_workflows_workflow" "example" {
     url = "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam"
   }
   deletion_protection = false
-  labels = {
-    env = "test"
-  }
   source_contents = <<-EOF
   # This is a sample workflow, feel free to replace it with your source code
   #
@@ -84,15 +82,12 @@ func testAccWorkflowsWorkflow_Updated(name string) string {
 resource "google_workflows_workflow" "example" {
   name           = "%s"
   region         = "us-central1"
-  description    = "Magic-updated"
-  call_log_level = "LOG_ALL_CALLS"
+  description    = "Magic"
+  call_log_level = "LOG_ERRORS_ONLY"
   user_env_vars = {
-    url = "https://timeapi.io/api/Time/current/zone?timeZone=Europe/London"
+    url = "https://timeapi.io/api/Time/current/zone?timeZone=Europe/Amsterdam"
   }
   deletion_protection = false
-  labels = {
-    env = "updated"
-  }
   source_contents = <<-EOF
   # This is a sample workflow, feel free to replace it with your source code
   #
@@ -109,7 +104,7 @@ resource "google_workflows_workflow" "example" {
       args:
           url: $${sys.get_env("url")}
       result: CurrentDateTime
-  - readWikipediaUpdated:
+  - readWikipedia:
       call: http.get
       args:
           url: https:/fi.wikipedia.org/w/api.php

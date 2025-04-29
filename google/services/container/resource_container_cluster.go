@@ -579,10 +579,9 @@ func ResourceContainerCluster() *schema.Resource {
 										Description: `Minimum amount of the resource in the cluster.`,
 									},
 									"maximum": {
-										Type:         schema.TypeInt,
-										Description:  `Maximum amount of the resource in the cluster.`,
-										Required:     true,
-										ValidateFunc: validation.IntAtLeast(1),
+										Type:        schema.TypeInt,
+										Optional:    true,
+										Description: `Maximum amount of the resource in the cluster.`,
 									},
 								},
 							},
@@ -6365,14 +6364,11 @@ func flattenAdvancedDatapathObservabilityConfig(c *container.AdvancedDatapathObs
 }
 
 func flattenManagedPrometheusConfig(c *container.ManagedPrometheusConfig) []map[string]interface{} {
-	if c == nil {
-		return nil
+	return []map[string]interface{}{
+		{
+			"enabled": c != nil && c.Enabled,
+		},
 	}
-
-	result := make(map[string]interface{})
-	result["enabled"] = c.Enabled
-
-	return []map[string]interface{}{result}
 }
 
 func flattenNodePoolAutoConfig(c *container.NodePoolAutoConfig) []map[string]interface{} {

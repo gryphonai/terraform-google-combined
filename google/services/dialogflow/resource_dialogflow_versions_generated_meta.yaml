@@ -1,0 +1,10 @@
+resource: 'google_dialogflow_versions'
+generation_type: 'mmv1'
+api_service_name: 'dialogflow.googleapis.com'
+api_version: 'v2beta1'
+api_resource_type_kind: 'Versions'
+fields:
+  - field: 'description'
+  - field: 'name'
+  - field: 'status'
+  - field: 'version_number'

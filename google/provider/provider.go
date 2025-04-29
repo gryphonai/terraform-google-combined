@@ -468,22 +468,12 @@ func Provider() *schema.Provider {
 				Optional:     true,
 				ValidateFunc: transport_tpg.ValidateCustomEndpoint,
 			},
-			"eventarc_custom_endpoint": {
-				Type:         schema.TypeString,
-				Optional:     true,
-				ValidateFunc: transport_tpg.ValidateCustomEndpoint,
-			},
 			"filestore_custom_endpoint": {
 				Type:         schema.TypeString,
 				Optional:     true,
 				ValidateFunc: transport_tpg.ValidateCustomEndpoint,
 			},
 			"firebase_app_check_custom_endpoint": {
-				Type:         schema.TypeString,
-				Optional:     true,
-				ValidateFunc: transport_tpg.ValidateCustomEndpoint,
-			},
-			"firebase_data_connect_custom_endpoint": {
 				Type:         schema.TypeString,
 				Optional:     true,
 				ValidateFunc: transport_tpg.ValidateCustomEndpoint,
@@ -1078,10 +1068,8 @@ func ProviderConfigure(ctx context.Context, d *schema.ResourceData, p *schema.Pr
 	config.EdgecontainerBasePath = d.Get("edgecontainer_custom_endpoint").(string)
 	config.EdgenetworkBasePath = d.Get("edgenetwork_custom_endpoint").(string)
 	config.EssentialContactsBasePath = d.Get("essential_contacts_custom_endpoint").(string)
-	config.EventarcBasePath = d.Get("eventarc_custom_endpoint").(string)
 	config.FilestoreBasePath = d.Get("filestore_custom_endpoint").(string)
 	config.FirebaseAppCheckBasePath = d.Get("firebase_app_check_custom_endpoint").(string)
-	config.FirebaseDataConnectBasePath = d.Get("firebase_data_connect_custom_endpoint").(string)
 	config.FirestoreBasePath = d.Get("firestore_custom_endpoint").(string)
 	config.GeminiBasePath = d.Get("gemini_custom_endpoint").(string)
 	config.GKEBackupBasePath = d.Get("gke_backup_custom_endpoint").(string)
